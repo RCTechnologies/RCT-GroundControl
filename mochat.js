@@ -1,3 +1,5 @@
+/* Deprecated Test
+
 var Application = require('spectron').Application
 var chai = require('chai')
 var chaiAsPromised = require('chai-as-promised')
@@ -35,3 +37,5 @@ describe('application launch', function () {
             .browserWindow.getBounds().should.eventually.have.property('height').and.be.above(0)
     })
 })
+
+*/
