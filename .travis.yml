@@ -1,7 +1,8 @@
 os:
   - linux
 
-language: node_js
+language:
+  - node_js
 
 node_js:
   - '6.5'
@@ -9,23 +10,41 @@ node_js:
 branches:
   only:
     - master
+    - /^ready\/.*$/
 
 before_script:
-  - "export DISPLAY=:99.0"
-  - "sh -e /etc/init.d/xvfb start"
-  - sleep 3 # give xvfb some time to start
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
+  - sleep 3
   - npm run package:linux
+  - export BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo $TRAVIS_BRANCH;
+    else echo $TRAVIS_PULL_REQUEST_BRANCH; fi)
+  - echo "TRAVIS_BRANCH=$TRAVIS_BRANCH, PR=$PR, BRANCH=$BRANCH"
 
 test_script:
-  ##- node --version
-  ##- .\node_modules\.bin\npm --version
-  - npm run test
+  - npm test
+
+after_success:
+  - if [ "$BRANCH" != "master" ]; then
+    git clone "https://github.com/"$TRAVIS_REPO_SLUG".git" repo_temp;
+    cd repo_temp;
+
+    echo Mergin;
+    git merge --ff-only origin/"$TRAVIS_BRANCH";
+
+    echo Pushing;
+    git push https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG master ;
+
+    else echo Was PULLREQUEST or directly on master; fi
 
 cache:
   directories:
     - node_modules
-
 notifications:
   email:
     on_success: never
     on_failure: change
+
+env:
+  global:
+    secure: TFC7VXV1Lit7tcYGcgcMXOaIIdZ8ph1nIKmntl0Fd+n6oD2U5qvrmkb/kT3V/+YcuRO3fC6INEyiZ3X5Czass9WSLo/YzgVkWyrN6e7FR0xYWazApwUZGhJc4irUR/UN3gOuQl3uPhE2Q3kckeqg11GfZU/LemjoWzjHwdn9fqAEskyAaRLIAN/YxNVOroqvwo6zdV6zPKsQQl5YPZDcGGGpL0eV0/6YnqRrsGaXP6NiBRfLyGqVp45cLDdZc87hUG4jqr8Bfk18GZQzh6T+JsD8lCUbRCYAfbYiNpzcD5flHtv7/xMKcKdPttY4Zvnmql3oqXtmkkwD1Y7luYLq8/FpyCFyRi+PfR7D8fNdKc4HklGwub2AVgEXwZiRiAwcFpil8+Gbn15oJ86kFykdHG083iXJB34rzZFTwnwdRbOSE1EnLv5ou1r/IYWrQ+yIjCxhk4U9KyJbXsRdSVxrNZaSl5s68suytxuoTiPdGpqjiTGOMhu//yc8aHKoWOHFmZE+DPpvmTgDsfDXX9V5+2zIwekLWy73YDZkZd1cpAaE5ehbLbMBw1ekmDCBqCLMIn3LfAaNmacLRkq39ChFhtg16vMQ6m9ATpCVvdLt1rSRye8I48+/PHeQ8p4q1fDr9msYSBUGsKkI8ETcaxuex2OIYKWtLK5+/JDCkX5o2NU=
