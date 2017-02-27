@@ -24,7 +24,7 @@ test(async t => {
     await app.client.waitUntilWindowLoaded();
 
     const win = app.browserWindow;
-    t.is(await app.client.getWindowCount(), 1);
+    t.is(await app.client.getWindowCount(), 2);
     t.false(await win.isMinimized());
     t.false(await win.isDevToolsOpened());
     t.true(await win.isVisible());
