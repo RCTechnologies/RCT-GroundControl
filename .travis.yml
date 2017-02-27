@@ -20,7 +20,7 @@ test_script:
 - npm test
 after_success:
 - |-
-  if [ "$BRANCH" != "master" ]; then git clone "https://github.com/"$TRAVIS_REPO_SLUG".git" repo_temp; cd repo_temp;
+  if [ "$TRAVIS_BRANCH" != "master" ]; then git clone "https://github.com/"$TRAVIS_REPO_SLUG".git" repo_temp; cd repo_temp;
   echo Mergin; git merge --ff-only origin/"$TRAVIS_BRANCH";
   echo Pushing; git push https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG master ;
   git push https://$GH_TOKEN@github.com/"$TRAVIS_REPO_SLUG" --delete "$BRANCH";
