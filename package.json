@@ -19,8 +19,9 @@
     "make": "electron-forge make",
     "lint": "tslint src",
     "//": "karma start --single-run",
-    "test": "ava test.js",
-    "watch": "npm-watch"
+    "test": "nyc _mocha example-test.js mochat.js --timeout=3000",
+    "watch": "npm-watch",
+    "build": "tsc -p ."
   },
   "watch": {
     "test": "src/**/*.*",
@@ -78,8 +79,10 @@
     "electron-forge": "^2.8.0",
     "electron-packager": "^8.5.2",
     "electron-prebuilt-compile": "1.4.15",
+    "istanbul": "^0.4.5",
     "mocha": "^3.2.0",
     "npm-watch": "^0.1.8",
+    "nyc": "^10.1.2",
     "protractor": "~5.1.0",
     "requirejs": "^2.3.3",
     "spectron": "^3.6.0",

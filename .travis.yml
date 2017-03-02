@@ -16,8 +16,10 @@ before_script:
 - export BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo $TRAVIS_BRANCH;
   else echo $TRAVIS_PULL_REQUEST_BRANCH; fi)
 - echo "TRAVIS_BRANCH=$TRAVIS_BRANCH, PR=$PR, BRANCH=$BRANCH"
+
 test_script:
 - npm test
+
 after_success:
 - |-
   if [ "$TRAVIS_BRANCH" != "master" ]; then git clone "https://github.com/"$TRAVIS_REPO_SLUG".git" repo_temp; cd repo_temp;
@@ -25,6 +27,7 @@ after_success:
   echo Pushing; git push https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG master ;
   git push https://$GH_TOKEN@github.com/"$TRAVIS_REPO_SLUG" --delete "$BRANCH";
   else echo Was PULLREQUEST or directly on master; fi
+- npm run coverage
 cache:
   directories:
   - node_modules
