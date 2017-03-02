@@ -28,7 +28,6 @@ test(async t => {
     t.false(await win.isMinimized());
     t.false(await win.isDevToolsOpened());
     t.true(await win.isVisible());
-    t.true(await win.isFocused());
 
     const {width, height} = await win.getBounds();
     t.true(width > 0);
