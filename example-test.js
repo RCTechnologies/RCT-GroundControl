@@ -9,7 +9,7 @@ chai.use(chaiAsPromised);
 describe('application launch', function () {
     beforeEach(function () {
         this.app = new Application({
-            path: './out/rct-groundcontrol-darwin-x64/rct-groundcontrol.app/Contents/MacOS/rct-groundcontrol'
+            path: './out/rct-groundcontrol-linux-x64/rct-groundcontrol'
         });
         return this.app.start()
     });
