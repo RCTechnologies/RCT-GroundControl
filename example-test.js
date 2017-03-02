@@ -9,6 +9,7 @@ chai.use(chaiAsPromised);
 describe('application launch', function () {
     beforeEach(function () {
         this.app = new Application({
+
             path: './out/rct-groundcontrol-linux-x64/rct-groundcontrol'
         });
         return this.app.start()
