@@ -33,12 +33,3 @@ test(async t => {
     t.true(width > 0);
     t.true(height > 0);
 });
-
-
-test(async t => {
-    const app = t.context.app;
-    await app.client.waitUntilWindowLoaded();
-
-    t.is(await app.client.waitUntilTextExists('h2', 'Welcome to electron-forge Angular2!!!', 2000));
-
-});
