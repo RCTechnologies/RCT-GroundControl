@@ -19,8 +19,8 @@
     "make": "electron-forge make",
     "lint": "tslint src",
     "//": "karma start --single-run",
-    "test":"ava t1e2s3t.js",
-    "coverage": "nyc _mocha example-test.js mochat.js --timeout=3000",
+    "test": "ava t1e2s3t.js",
+    "coverage": "nyc _mocha example-test.js --timeout=3000 && nyc report --reporter=text-lcov | coveralls",
     "watch": "npm-watch",
     "build": "tsc -p ."
   },
@@ -77,6 +77,7 @@
     "babel-preset-react": "^6.23.0",
     "chai": "^3.5.0",
     "chai-as-promised": "^6.0.0",
+    "coveralls": "^2.11.16",
     "electron-forge": "^2.8.0",
     "electron-packager": "^8.5.2",
     "electron-prebuilt-compile": "1.4.15",
