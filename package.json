@@ -20,7 +20,7 @@
     "lint": "tslint src",
     "//": "karma start --single-run",
     "test": "ava t1e2s3t.js",
-    "coverage": "nyc _mocha example-test.js --timeout=3000 && nyc report --reporter=text-lcov | coveralls",
+    "coverage": "nyc ava t1e2s3t.js && nyc report --reporter=text-lcov | coveralls ",
     "watch": "npm-watch",
     "build": "tsc -p ."
   },
