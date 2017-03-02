@@ -36,24 +36,10 @@ test(async t => {
 });
 
 
-describe('when the make larger button is clicked', function () {
-    it('increases the window height and width by 10 pixels', function () {
-        return app.client.waitUntilWindowLoaded()
-            .browserWindow.getBounds().should.eventually.have.property('width', 800)
-            .browserWindow.getBounds().should.eventually.have.property('height', 400)
-            .click('.btn-make-bigger')
-            .browserWindow.getBounds().should.eventually.have.property('width', 810)
-            .browserWindow.getBounds().should.eventually.have.property('height', 410)
-    })
-});
+test(async t => {
+    const app = t.context.app;
+    await app.client.waitUntilWindowLoaded();
 
-describe('when the make smaller button is clicked', function () {
-    it('decreases the window height and width by 10 pixels', function () {
-        return app.client.waitUntilWindowLoaded()
-            .browserWindow.getBounds().should.eventually.have.property('width', 800)
-            .browserWindow.getBounds().should.eventually.have.property('height', 400)
-            .click('.btn-make-smaller')
-            .browserWindow.getBounds().should.eventually.have.property('width', 790)
-            .browserWindow.getBounds().should.eventually.have.property('height', 390)
-    })
+    t.is(await app.client.waitUntilTextExists('h2', 'Welcome to electron-forge Angular2!!!', 2000));
+
 });

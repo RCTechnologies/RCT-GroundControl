@@ -19,7 +19,8 @@
     "make": "electron-forge make",
     "lint": "tslint src",
     "//": "karma start --single-run",
-    "test": "nyc _mocha example-test.js mochat.js --timeout=3000",
+    "test":"ava t1e2s3t.js",
+    "test:mocha": "nyc _mocha example-test.js mochat.js --timeout=3000",
     "watch": "npm-watch",
     "build": "tsc -p ."
   },
