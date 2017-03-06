@@ -8,7 +8,7 @@ import { GoogleMapsComponent } from './gmaps/google-maps.component';
 @NgModule({
   imports: [BrowserModule,
     AgmCoreModule.forRoot({
-      apiKey: '[Insert API key here]'
+      apiKey: '[Insert your api key here]'
     })],
   declarations: [
     AppComponent,
