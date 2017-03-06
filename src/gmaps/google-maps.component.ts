@@ -161,15 +161,19 @@ export class GoogleMapsComponent implements OnInit {
     }
   }
 
+  // Happens when clicking the polygon
   polyClick($event: PolyMouseEvent) {
   }
 
+  // Happens when doubleclicking the polygon
   polyDblClick($event: PolyMouseEvent) {
   }
 
+  // Happens when dragging the polygon
   polyDrag($event: MouseEvent) {
   }
 
+  // Happens once afte the polygon is not being dragged anymore
   polyDragEnd($event) {
     // Push to MapActionStack
     this.mapActionStack.push(new MapAction(MapActionType.POLYGON_DRAGGED, this.paths2));
@@ -217,29 +221,38 @@ export class GoogleMapsComponent implements OnInit {
     //alert('lat difference: ' + (differenceLat));
   }
 
+  // Happens once when the mouse is pressed on when cursor is inside of polygon
   polyMouseDown($event: PolyMouseEvent) {
     this.polyMouseDownCoord = { lat: $event.latLng.lat(), lng: $event.latLng.lng() };
     this.checkForVertexDrag($event);
   }
 
+  // Happens when cursor is moven across polygon
   polyMouseMove($event: PolyMouseEvent) {
     this.checkForVertexDrag($event);
   }
 
+  // Happens once when cursor leaves the polygon
   polyMouseOut($event: PolyMouseEvent) {
     this.checkForVertexDrag($event);
   }
 
+  // Happens once when cursor enter the polygon
   polyMouseOver($event: PolyMouseEvent) {
     this.checkForVertexDrag($event);
   }
 
+  // Happens once when the mouse is released after it was being pressed down
   polyMouseUp($event: PolyMouseEvent) {
     this.checkForVertexDrag($event);
   }
 
+  // Happens when right-clicking on the polygon
   polyRightClick($event: PolyMouseEvent) {
   }
+
+// ======================== CUSTOM UTILITY FUNCTIONS ========================== //
+
 
   togglePolygonMode() {
     this.polygonMode = !this.polygonMode;
