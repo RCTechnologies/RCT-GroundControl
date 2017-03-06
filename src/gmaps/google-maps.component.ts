@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { SebmGoogleMap, SebmGoogleMapPolygon, LatLngLiteral, PolyMouseEvent } from 'angular2-google-maps/core';
+
+import { MapActionStack } from './util/map-action-stack';
+import { MapAction } from './util/map-action';
+import { MapActionType } from './util/map-action-type.enum';
+
+
 @Component({
   selector: 'app-google-maps',
   styles:[`
@@ -43,6 +49,7 @@ import { SebmGoogleMap, SebmGoogleMapPolygon, LatLngLiteral, PolyMouseEvent } fr
 
     <button id="button" (click)="togglePolygonMode()"><b>Polygon Mode</b> <b [ngStyle]="{color: (polygonMode)? 'green':'red'}">{{polygonMode}}</b></button>
     <button id="button" (click)="deletePolygon()" [disabled]="paths2.length == 0"><b>Delete Polygon</b></button>
+    <button id="button" (click)="undo()" [disabled]="mapActionStack.isEmpty()"><b>Undo</b></button>
     
 
     <sebm-google-map 
@@ -119,6 +126,7 @@ export class GoogleMapsComponent implements OnInit {
 
   latestVertex: number = -1;
 
+  mapActionStack: MapActionStack;
 
   // Should be used to show the drone's current position
   marker = {
@@ -138,10 +146,13 @@ export class GoogleMapsComponent implements OnInit {
 
   // FUNCTIONS
   ngOnInit() {
-
+    this.mapActionStack = new MapActionStack();
   }
 
   mapClicked($event) {
+    // Push to MapActionStack
+    this.mapActionStack.push(new MapAction(MapActionType.VERTEX_ADDED, this.paths2));
+
     this.mapClickedLat = $event.coords.lat;
     this.mapClickedLng = $event.coords.lng;
 
@@ -160,6 +171,8 @@ export class GoogleMapsComponent implements OnInit {
   }
 
   polyDragEnd($event) {
+    // Push to MapActionStack
+    this.mapActionStack.push(new MapAction(MapActionType.POLYGON_DRAGGED, this.paths2));
 
     this.polyDragEndCoord = { lat: $event.latLng.lat(), lng: $event.latLng.lng() };
 
@@ -206,23 +219,23 @@ export class GoogleMapsComponent implements OnInit {
 
   polyMouseDown($event: PolyMouseEvent) {
     this.polyMouseDownCoord = { lat: $event.latLng.lat(), lng: $event.latLng.lng() };
-    this.checkForDragging($event);
+    this.checkForVertexDrag($event);
   }
 
   polyMouseMove($event: PolyMouseEvent) {
-    this.checkForDragging($event);
+    this.checkForVertexDrag($event);
   }
 
   polyMouseOut($event: PolyMouseEvent) {
-    this.checkForDragging($event);
+    this.checkForVertexDrag($event);
   }
 
   polyMouseOver($event: PolyMouseEvent) {
-    this.checkForDragging($event);
+    this.checkForVertexDrag($event);
   }
 
   polyMouseUp($event: PolyMouseEvent) {
-    this.checkForDragging($event);
+    this.checkForVertexDrag($event);
   }
 
   polyRightClick($event: PolyMouseEvent) {
@@ -242,7 +255,7 @@ export class GoogleMapsComponent implements OnInit {
 
   // UTILITY FUNCTIONS
 
-  checkForDragging($event: PolyMouseEvent) {
+  checkForVertexDrag($event: PolyMouseEvent) {
       // If $event.vertex == null, then the even doesn't occur on a vertex
       // therefore a vertex is not dragged.
     if ($event.vertex == null) {
@@ -250,6 +263,10 @@ export class GoogleMapsComponent implements OnInit {
       this.latestVertex = $event.vertex;
       this.paths2[$event.vertex] = { lat: $event.latLng.lat(), lng: $event.latLng.lng() };
     }
+  }
+
+  undo() {
+    this.paths2 = this.mapActionStack.pop().paths;
   }
 
 }
