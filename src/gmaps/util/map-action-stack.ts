@@ -1,11 +1,12 @@
+import { IMapActionStack } from './imap-action-stack';
 import { IMapAction } from './imap-action';
-import { MapAction } from './map-action';
+import { MapAction } from './map-action'
 import { LatLngLiteral } from 'angular2-google-maps/core';
 
-// TODO: later implement functionality to unde AND redo
+// TODO: later implement functionality to undo AND redo
 
-export class MapActionStack {
-    private stack: Array<IMapAction> = [];
+export class MapActionStack implements IMapActionStack {
+    stack: Array<IMapAction> = [];
 
     public push(mapAction: IMapAction) {
         var newMapAction: IMapAction = new MapAction(mapAction.type, 
@@ -19,7 +20,7 @@ export class MapActionStack {
         this.stack.push(newMapAction);
     }
 
-    public pop(): IMapAction {
+    public pop(): IMapAction | undefined {
         var tempAction;
         if (this.stack.length > 0) {
             tempAction = this.stack.pop();
@@ -27,7 +28,7 @@ export class MapActionStack {
         return tempAction;
     }
 
-    public size(): number {
+    public getSize(): number {
         return this.stack.length;
     }
 
