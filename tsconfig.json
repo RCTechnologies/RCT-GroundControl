@@ -7,9 +7,9 @@
     "noImplicitAny": true,
     "noImplicitReturns": true,
     "suppressImplicitAnyIndexErrors": true,
-    "strictNullChecks": true,
+    "strictNullChecks": false,
     "experimentalDecorators": true,
-    "noUnusedLocals": true,
+    "noUnusedLocals": false,
     "noImplicitThis": true,
     "noUnusedParameters": true,
     "importHelpers": true,
@@ -28,7 +28,8 @@
     "node_modules/**",
     "out",
     "coverage",
-    ".nyc_output"
+    ".nyc_output",
+    "./dist"
   ]
 
 }

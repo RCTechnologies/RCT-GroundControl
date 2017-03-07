@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SebmGoogleMap, SebmGoogleMapPolygon, LatLngLiteral, PolyMouseEvent } from 'angular2-google-maps/core';
+import { SebmGoogleMap, SebmGoogleMapPolygon, LatLngLiteral, PolyMouseEvent, MouseEvent } from 'angular2-google-maps/core';
 
 import { MapActionStack } from './util/map-action-stack';
 import { MapAction } from './util/map-action';
@@ -149,9 +149,11 @@ export class GoogleMapsComponent implements OnInit {
     this.mapActionStack = new MapActionStack();
   }
 
-  mapClicked($event) {
+  mapClicked($event: MouseEvent) {
     // Push to MapActionStack
     this.mapActionStack.push(new MapAction(MapActionType.VERTEX_ADDED, this.paths2));
+
+    console.log($event);
 
     this.mapClickedLat = $event.coords.lat;
     this.mapClickedLng = $event.coords.lng;
@@ -163,18 +165,23 @@ export class GoogleMapsComponent implements OnInit {
 
   // Happens when clicking the polygon
   polyClick($event: PolyMouseEvent) {
+      console.log($event);
   }
 
   // Happens when doubleclicking the polygon
   polyDblClick($event: PolyMouseEvent) {
+      console.log($event);
   }
 
   // Happens when dragging the polygon
   polyDrag($event: MouseEvent) {
+      console.log($event);
   }
 
   // Happens once afte the polygon is not being dragged anymore
-  polyDragEnd($event) {
+  polyDragEnd($event: PolyMouseEvent) {
+      console.log('PolyDragEnd');
+      console.log($event);
     // Push to MapActionStack
     this.mapActionStack.push(new MapAction(MapActionType.POLYGON_DRAGGED, this.paths2));
 
@@ -183,6 +190,8 @@ export class GoogleMapsComponent implements OnInit {
     var differenceLat: number = this.polyDragEndCoord.lat - this.polyMouseDownCoord.lat;
     var differenceLng: number = this.polyDragEndCoord.lng - this.polyMouseDownCoord.lng;
     // alert('differenceLat: ' + differenceLat + ' differenceLng ' + differenceLng);
+
+    console.log($event);
 
     this.paths2.forEach(function (vertex) {
 
@@ -249,6 +258,7 @@ export class GoogleMapsComponent implements OnInit {
 
   // Happens when right-clicking on the polygon
   polyRightClick($event: PolyMouseEvent) {
+    console.log($event);
   }
 
 // ======================== CUSTOM UTILITY FUNCTIONS ========================== //
@@ -258,7 +268,7 @@ export class GoogleMapsComponent implements OnInit {
     this.polygonMode = !this.polygonMode;
   }
 
-  deployPolygonPoint(lat, lng) {
+  deployPolygonPoint(lat: number, lng: number) {
     this.paths2.push({ lat: lat, lng: lng });
   }
 
@@ -279,7 +289,9 @@ export class GoogleMapsComponent implements OnInit {
   }
 
   undo() {
-    this.paths2 = this.mapActionStack.pop().paths;
+    if(!this.mapActionStack.isEmpty()){
+        this.paths2 = this.mapActionStack.pop().paths;
+    }
   }
 
 }
