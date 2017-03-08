@@ -1,7 +1,7 @@
 import { IMapActionStack } from './imap-action-stack';
 import { IMapAction } from './imap-action';
 import { MapAction } from './map-action'
-import { LatLngLiteral } from 'angular2-google-maps/core';
+import { LatLngLiteral } from './../../../node_modules/angular2-google-maps/core';
 
 // TODO: later implement functionality to undo AND redo
 

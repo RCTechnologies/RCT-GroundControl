@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SebmGoogleMap, SebmGoogleMapPolygon, LatLngLiteral, PolyMouseEvent, MouseEvent } from 'angular2-google-maps/core';
+import { SebmGoogleMap, SebmGoogleMapPolygon, LatLngLiteral, PolyMouseEvent, MouseEvent } from './../../node_modules/angular2-google-maps/core';
 
 import { MapActionStack } from './util/map-action-stack';
 import { MapAction } from './util/map-action';

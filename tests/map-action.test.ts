@@ -2,7 +2,7 @@ import test from 'ava';
 
 import { MapAction } from './../src/gmaps/util/map-action';
 import { MapActionType } from './../src/gmaps/util/map-action-type.enum';
-import {LatLngLiteral} from 'angular2-google-maps/core';
+import {LatLngLiteral} from './../node_modules/angular2-google-maps/core';
 
 test('Test of getType()',t => {
     var mapAction = new MapAction(MapActionType.POLYGON_DRAGGED, []);

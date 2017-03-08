@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 
-import { AgmCoreModule } from 'angular2-google-maps/core';
+import { AgmCoreModule } from './../node_modules/angular2-google-maps/core';
 import { GoogleMapsComponent } from './gmaps/google-maps.component';
 
 @NgModule({

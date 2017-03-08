@@ -1,4 +1,4 @@
-import {LatLngLiteral} from 'angular2-google-maps/core';
+import {LatLngLiteral} from './../../../node_modules/angular2-google-maps/core';
 import {MapActionType} from './map-action-type.enum';
 
 // The class that implements this interface, should function as a 'snapshot' of the current state of a given

@@ -3,7 +3,7 @@ import test from 'ava';
 import { MapAction } from './../src/gmaps/util/map-action';
 import { MapActionType } from './../src/gmaps/util/map-action-type.enum';
 import { MapActionStack } from './../src/gmaps/util/map-action-stack';
-import { LatLngLiteral } from 'angular2-google-maps/core';
+import { LatLngLiteral } from './../node_modules/angular2-google-maps/core';
 
 
 test('Test of push()',t => {
