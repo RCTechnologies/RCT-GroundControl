@@ -15,7 +15,7 @@ import { MapActionType } from './util/map-action-type.enum';
   
   #button{
     width: 125px;
-    height: 20px;
+    height: 30px;
     border: none;
   }
 
@@ -48,6 +48,7 @@ import { MapActionType } from './util/map-action-type.enum';
   `
 
     <button id="button" (click)="togglePolygonMode()"><b>Polygon Mode</b> <b [ngStyle]="{color: (polygonMode)? 'green':'red'}">{{polygonMode}}</b></button>
+    <button id="button" (click)="togglePointToPointMode()"><b>Point-to-Point Mode</b> <b [ngStyle]="{color: (pointToPointMode)? 'green':'red'}">{{pointToPointMode}}</b></button>
     <button id="button" (click)="deletePolygon()" [disabled]="paths2.length == 0"><b>Delete Polygon</b></button>
     <button id="button" (click)="undo()" [disabled]="mapActionStack.isEmpty()"><b>Undo</b></button>
     
@@ -137,6 +138,7 @@ export class GoogleMapsComponent implements OnInit {
   zoom: number = 16;
 
   polygonMode: boolean = false;
+  pointToPointMode: boolean = false;
 
   paths2: Array<LatLngLiteral> = [];
 
@@ -266,6 +268,12 @@ export class GoogleMapsComponent implements OnInit {
 
   togglePolygonMode() {
     this.polygonMode = !this.polygonMode;
+    this.pointToPointMode = false;
+  }
+
+  togglePointToPointMode(){
+    this.pointToPointMode = !this.pointToPointMode;
+    this.polygonMode = false;
   }
 
   deployPolygonPoint(lat: number, lng: number) {
