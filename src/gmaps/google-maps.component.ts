@@ -50,6 +50,7 @@ import { MapActionType } from './util/map-action-type.enum';
     <button id="button" (click)="togglePolygonMode()"><b>Polygon Mode</b> <b [ngStyle]="{color: (polygonMode)? 'green':'red'}">{{polygonMode}}</b></button>
     <button id="button" (click)="togglePointToPointMode()"><b>Point-to-Point Mode</b> <b [ngStyle]="{color: (pointToPointMode)? 'green':'red'}">{{pointToPointMode}}</b></button>
     <button id="button" (click)="deletePolygon()" [disabled]="paths2.length == 0"><b>Delete Polygon</b></button>
+    <button id="button" (click)="deletePolyline()" [disabled]="points.length == 0"><b>Delete Polyline</b></button>
     <button id="button" (click)="undo()" [disabled]="mapActionStack.isEmpty()"><b>Undo</b></button>
     
 
@@ -289,6 +290,10 @@ export class GoogleMapsComponent implements OnInit {
 
   deletePolygon() {
     this.paths2 = [];
+  }
+
+  deletePolyline(){
+    this.points = [];
   }
 
   deployPoint(clickedPoint: LatLngLiteral){
