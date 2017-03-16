@@ -292,6 +292,8 @@ export class GoogleMapsComponent implements OnInit {
   }
 
   deployPoint(clickedPoint: LatLngLiteral){
+    // Push to MapActionStack
+    this.mapActionStack.push(new MapAction(MapActionType.POINT_ADDED, this.points));
     this.points.push({ lat: clickedPoint.lat, lng: clickedPoint.lng })
   }
 
@@ -308,8 +310,21 @@ export class GoogleMapsComponent implements OnInit {
   }
 
   undo() {
+    
     if(!this.mapActionStack.isEmpty()){
-        this.paths2 = this.mapActionStack.pop().paths;
+      let poppedItem: MapAction = this.mapActionStack.pop();
+        switch(poppedItem.getType()){
+          case MapActionType.POLYGON_DRAGGED:
+            break;
+          case MapActionType.VERTEX_DRAGGED:
+            break;
+          case MapActionType.VERTEX_ADDED:
+            this.paths2 = poppedItem.getPaths();
+            break;
+          case MapActionType.POINT_ADDED:
+            this.points = poppedItem.getPaths();
+            break;
+        }
     }
   }
 
