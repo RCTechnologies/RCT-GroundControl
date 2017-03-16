@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SebmGoogleMap, SebmGoogleMapPolygon, LatLngLiteral, PolyMouseEvent, MouseEvent } from './../../node_modules/angular2-google-maps/core';
+import { SebmGoogleMap, SebmGoogleMapPolygon, LatLngLiteral, PolyMouseEvent, MouseEvent, SebmGoogleMapPolyline, SebmGoogleMapPolylinePoint } from './../../node_modules/angular2-google-maps/core';
 
 import { MapActionStack } from './util/map-action-stack';
 import { MapAction } from './util/map-action';
@@ -107,6 +107,11 @@ import { MapActionType } from './util/map-action-type.enum';
       (ngOnChanges)="ngOnChanges($event)"
       >
       </sebm-map-polygon> 
+
+      <sebm-google-map-polyline>
+         <sebm-google-map-polyline-point *ngFor="let item of points; let i = index" [latitude]="item.lat" [longitude]="item.lng">
+         </sebm-google-map-polyline-point>
+     </sebm-google-map-polyline>
       
 
     </sebm-google-map>
@@ -121,9 +126,6 @@ import { MapActionType } from './util/map-action-type.enum';
 export class GoogleMapsComponent implements OnInit {
   lat: number = 55.6717155;
   lng: number = 12.6132054;
-
-  mapClickedLat: number;
-  mapClickedLng: number;
 
   latestVertex: number = -1;
 
@@ -140,7 +142,11 @@ export class GoogleMapsComponent implements OnInit {
   polygonMode: boolean = false;
   pointToPointMode: boolean = false;
 
+  // For drawing the polygon
   paths2: Array<LatLngLiteral> = [];
+
+  // For drawing the point-to-point
+  points: Array<LatLngLiteral> = [];
 
   polyMouseDownCoord: LatLngLiteral;
 
@@ -152,16 +158,15 @@ export class GoogleMapsComponent implements OnInit {
   }
 
   mapClicked($event: MouseEvent) {
-    // Push to MapActionStack
-    this.mapActionStack.push(new MapAction(MapActionType.VERTEX_ADDED, this.paths2));
-
     console.log($event);
 
-    this.mapClickedLat = $event.coords.lat;
-    this.mapClickedLng = $event.coords.lng;
+    let clickedPoint: LatLngLiteral = $event.coords;
 
     if (this.polygonMode == true) {
-      this.deployPolygonPoint(this.mapClickedLat, this.mapClickedLng);
+      this.deployPolygonPoint(clickedPoint);
+    }
+    if (this.pointToPointMode == true){
+      this.deployPoint(clickedPoint);
     }
   }
 
@@ -276,12 +281,18 @@ export class GoogleMapsComponent implements OnInit {
     this.polygonMode = false;
   }
 
-  deployPolygonPoint(lat: number, lng: number) {
-    this.paths2.push({ lat: lat, lng: lng });
+  deployPolygonPoint(clickedPoint: LatLngLiteral) {
+    // Push to MapActionStack
+    this.mapActionStack.push(new MapAction(MapActionType.VERTEX_ADDED, this.paths2));
+    this.paths2.push({ lat: clickedPoint.lat, lng: clickedPoint.lng });
   }
 
   deletePolygon() {
     this.paths2 = [];
+  }
+
+  deployPoint(clickedPoint: LatLngLiteral){
+    this.points.push({ lat: clickedPoint.lat, lng: clickedPoint.lng })
   }
 
   // UTILITY FUNCTIONS
