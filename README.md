@@ -5,10 +5,15 @@ Companion Software for Multipurpose Drone Platform
 ### Regarding template VS templateUrl
 There is an issue w. Angular 2, that when using templateUrl in a component, you should give the entire url and not the relative url, else it will throw an error. 
 
-### Git Phlow
+## TO DO
+
+### Switch to Git Phlow
 Some basic phlow commands are:
 ```
 git phlow workon [some-issue]
 git phlow wrapup
 git phlow deliver
 ```
+
+### Use Dronekit-Sitl in test
+Using a System in the loop emulated drone, we should be able to integrate functional testing in our chain
