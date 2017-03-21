@@ -5,3 +5,4 @@ out
 coverage
 .DS_Store
 dist
+src/python/timestamp.txt
