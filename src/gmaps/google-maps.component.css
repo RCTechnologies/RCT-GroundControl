@@ -1,0 +1,27 @@
+.sebm-google-map-container {
+    height: 800px;
+}
+  
+#button{
+    width: 125px;
+    height: 30px;
+    border: none;
+}
+#static-console {
+    position:fixed;
+    left: 1100px;
+    top:0;
+    width: 100%;
+    min-height: 150px;
+    background-color:rgba(0, 0, 0, 0.6);
+    color: ghostwhite;
+    text-align: left;
+    font-family: arial;
+}
+#static-console p{
+    margin-top: 2px;
+    margin-bottom: 2px;
+    font-size: 12px;
+    margin-left:5px;
+    font-weight: bold;
+}

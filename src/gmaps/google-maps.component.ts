@@ -9,42 +9,7 @@ import { MapActionType } from './util/map-action-type.enum';
 @Component({
   selector: 'app-google-maps',
   moduleId: module.id,
-  styles:[`
-   .sebm-google-map-container {
-     height: 600px;
-   }
-  
-  #button{
-    width: 125px;
-    height: 30px;
-    border: none;
-  }
-
-
-   #static {
-    position:fixed;
-   left: 640px;
-   top:0;
-    width: 100%;
-    min-height: 150px;
-    background-color:rgba(0, 0, 0, 0.6);
-    color: ghostwhite;
-    text-align: left;
-    font-family: arial;
-}
-
-#bottom p{
-  margin-top: 2px;
-  margin-bottom: 2px;
-  font-size: 12px;
-  margin-left:5px;
-  font-weight: bold;
-}
-
-#top{
-  position
-}
-`],
+  styleUrls:['google-maps.component.css'],
   templateUrl: 'google-maps.component.html'
 })
 export class GoogleMapsComponent implements OnInit {
