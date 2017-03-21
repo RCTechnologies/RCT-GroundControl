@@ -8,6 +8,7 @@ import { MapActionType } from './util/map-action-type.enum';
 
 @Component({
   selector: 'app-google-maps',
+  moduleId: module.id,
   styles:[`
    .sebm-google-map-container {
      height: 600px;
@@ -20,7 +21,7 @@ import { MapActionType } from './util/map-action-type.enum';
   }
 
 
-   #bottom {
+   #static {
     position:fixed;
    left: 640px;
    top:0;
@@ -44,85 +45,7 @@ import { MapActionType } from './util/map-action-type.enum';
   position
 }
 `],
-  template: 
-  `
-
-    <button id="button" (click)="togglePolygonMode()"><b>Polygon Mode</b> <b [ngStyle]="{color: (polygonMode)? 'green':'red'}">{{polygonMode}}</b></button>
-    <button id="button" (click)="togglePointToPointMode()"><b>Point-to-Point Mode</b> <b [ngStyle]="{color: (pointToPointMode)? 'green':'red'}">{{pointToPointMode}}</b></button>
-    <button id="button" (click)="deletePolygon()" [disabled]="paths2.length == 0"><b>Delete Polygon</b></button>
-    <button id="button" (click)="deletePolyline()" [disabled]="points.length == 0"><b>Delete Polyline</b></button>
-    <button id="button" (click)="undo()" [disabled]="mapActionStack.isEmpty()"><b>Undo</b></button>
-    
-
-    <sebm-google-map 
-    [latitude]="lat" 
-    [longitude]="lng" 
-    [zoom]="zoom"
-    [disableDoubleClickZoom]="true"
-    (mapClick)="mapClicked($event)">
-
-    <sebm-google-map-marker [latitude]="marker.lat" [longitude]="marker.lng" [label]="'M'">
-     </sebm-google-map-marker>
-
-      <sebm-map-polygon *ngIf="paths2.length%2==0" 
-      [paths]="paths2"
-      [fillColor]="'lime'"
-      [fillOpacity]="0.4"
-      [strokeColor]="'black'"
-      [strokeWeight]="1.5"
-      [polyDraggable]="true" 
-      [editable]="true"
-      (polyClick)="polyClick($event)"
-      (polyDblClick)="polyDblClick($event)"
-      (polyDrag)="polyDrag($event)"
-      (polyDragEnd)="polyDragEnd($event)"
-      (polyMouseDown)="polyMouseDown($event)"
-      (polyMouseMove)="polyMouseMove($event)"
-      (polyMouseOut)="polyMouseOut($event)"
-      (polyMouseOver)="polyMouseOver($event)"
-      (polyMouseUp)="polyMouseUp($event)"
-      (polyRightClick)="polyRightClick($event)"
-      (ngOnChanges)="ngOnChanges($event)"
-      >
-      </sebm-map-polygon>
-      
-      
-      <sebm-map-polygon *ngIf="paths2.length%2==1" 
-      [paths]="paths2"
-      [fillColor]="'lime'"
-      [fillOpacity]="0.4"
-      [strokeColor]="'black'"
-      [strokeWeight]="1.5"
-      [polyDraggable]="true" 
-      [editable]="true"
-      (polyClick)="polyClick($event)"
-      (polyDblClick)="polyDblClick($event)"
-      (polyDrag)="polyDrag($event)"
-      (polyDragEnd)="polyDragEnd($event)"
-      (polyMouseDown)="polyMouseDown($event)"
-      (polyMouseMove)="polyMouseMove($event)"
-      (polyMouseOut)="polyMouseOut($event)"
-      (polyMouseOver)="polyMouseOver($event)"
-      (polyMouseUp)="polyMouseUp($event)"
-      (polyRightClick)="polyRightClick($event)"
-      (ngOnChanges)="ngOnChanges($event)"
-      >
-      </sebm-map-polygon> 
-
-      <sebm-google-map-polyline>
-         <sebm-google-map-polyline-point *ngFor="let item of points; let i = index" [latitude]="item.lat" [longitude]="item.lng">
-         </sebm-google-map-polyline-point>
-     </sebm-google-map-polyline>
-      
-
-    </sebm-google-map>
-
-    <div id="bottom">
-      
-        <p *ngFor="let item of paths2; let i = index" [ngStyle]="{color: (latestVertex == i)? 'cyan':'white'}">lat: {{item.lat}}, lng: {{item.lng}}</p>
-      
-    </div>
-  `
+  templateUrl: 'google-maps.component.html'
 })
 export class GoogleMapsComponent implements OnInit {
   lat: number = 55.6717155;
