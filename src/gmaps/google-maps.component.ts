@@ -5,6 +5,8 @@ import { MapActionStack } from './util/map-action-stack';
 import { MapAction } from './util/map-action';
 import { MapActionType } from './util/map-action-type.enum';
 
+var PythonShell = require('./../../node_modules/python-shell');
+
 
 @Component({
   selector: 'app-google-maps',
