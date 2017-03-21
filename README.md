@@ -2,9 +2,6 @@
 
 Companion Software for Multipurpose Drone Platform
 
-### Regarding template VS templateUrl
-There is an issue w. Angular 2, that when using templateUrl in a component, you should give the entire url and not the relative url, else it will throw an error. 
-
 ## TO DO
 
 ### Switch to Git Phlow
