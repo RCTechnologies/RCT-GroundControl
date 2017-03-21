@@ -223,4 +223,15 @@ export class GoogleMapsComponent implements OnInit {
     }
   }
 
+  executePythonScript(){
+    var options = {
+      scriptPath: './src/python'
+    }
+    PythonShell.run('timestamp.py', options, function(err, results){
+      if (err) throw err;
+      var results = results;
+      alert('pythonscript executed!');
+    })
+  }
+
 }
