@@ -28,6 +28,8 @@ git checkout master
 git phlow cleanup
 ```
 And repeat...
+
+## TODO's
 ```
 Squash Commits
 
