@@ -2,11 +2,22 @@
 
 Companion Software for Multipurpose Drone Platform
 
+### Setup of Git Phlow
 
 
 ### Basic Git Phlow
 ```
 git phlow workon 42
+```
+Do your changes...
+```
+git add .
+
+git commit -m "message"
+```
+Commit more if necessary.
+When you are completely done with the issue, then...
+```
 git phlow wrapup
 git phlow deliver
 ```
