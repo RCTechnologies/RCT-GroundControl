@@ -17,6 +17,7 @@ git commit -m "message"
 ```
 Commit more if necessary.
 When you are completely done with the issue, then...
+Note: you need to have modifications in order to make "git phlow wrapup" functional
 ```
 git phlow wrapup
 git phlow deliver
