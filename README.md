@@ -5,12 +5,14 @@ Companion Software for Multipurpose Drone Platform
 ## TO DO
 
 ### Switch to Git Phlow
-Some basic phlow commands are:
+Some basic phlow commands are (example):
 ```
-git phlow workon [some-issue]
+git phlow workon 42
 git phlow wrapup
 git phlow deliver
 ```
 
 ### Use Dronekit-Sitl in test
 Using a System in the loop emulated drone, we should be able to integrate functional testing in our chain
+
+
