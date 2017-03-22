@@ -2,14 +2,20 @@
 
 Companion Software for Multipurpose Drone Platform
 
-## TO DO
 
-### Switch to Git Phlow
-Some basic phlow commands are (example):
+
+### Basic Git Phlow
 ```
 git phlow workon 42
 git phlow wrapup
 git phlow deliver
+```
+And if you need to work on a new issue do following:
+```
+git checkout master
+git phlow cleanup
+```
+And repeat...
 ```
 Squash Commits
 
