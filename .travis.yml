@@ -29,10 +29,11 @@ after_success:
   git push https://$GH_TOKEN@github.com/"$TRAVIS_REPO_SLUG" --delete "$BRANCH";
   else echo Was PULLREQUEST or directly on master; fi
 
+- |-
   echo Coverage;
   if [ "$TRAVIS_BRANCH" != "master" ];
   then npm run coverage;
-  else echo Was ready branch;
+  else echo Was ready branch; fi
 
 cache:
   directories:
