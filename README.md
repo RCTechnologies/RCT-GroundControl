@@ -11,6 +11,7 @@ git phlow workon 42
 git phlow wrapup
 git phlow deliver
 ```
+Squash Commits
 
 ### Use Dronekit-Sitl in test
 Using a System in the loop emulated drone, we should be able to integrate functional testing in our chain
