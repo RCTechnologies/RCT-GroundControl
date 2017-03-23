@@ -1,4 +1,7 @@
 # pylint: skip-file
+
+# currently not to be used
+
 from time import sleep
 from dronekit import connect, VehicleMode
 # (in this case a TCP endpoint)
