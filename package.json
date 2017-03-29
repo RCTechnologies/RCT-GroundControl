@@ -21,6 +21,7 @@
     "//": "karma start --single-run",
     "test": "tsc && ava --verbose dist/tests/*.js && ava --verbose tests/t1e2s3t.test.js",
     "coverage": "nyc npm test && nyc report --reporter=text-lcov | coveralls ",
+    "check" : "nyc check-coverage --lines 90 --functions 90 --branches 90",
     "watch": "npm-watch",
     "build": "tsc -p ."
   },

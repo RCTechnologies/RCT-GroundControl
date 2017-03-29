@@ -18,8 +18,8 @@ before_script:
   else echo $TRAVIS_PULL_REQUEST_BRANCH; fi)
 - echo "TRAVIS_BRANCH=$TRAVIS_BRANCH, PR=$PR, BRANCH=$BRANCH"
 
-test_script:
-- npm test
+script:
+- npm run coverage
 
 after_success:
 - |-
@@ -29,11 +29,11 @@ after_success:
   git push https://$GH_TOKEN@github.com/"$TRAVIS_REPO_SLUG" --delete "$BRANCH";
   else echo Was PULLREQUEST or directly on master; fi
 
+after_script:
 - |-
-  echo Coverage;
   if [ "$TRAVIS_BRANCH" == "master" ];
-  then npm run coverage;
-  else echo Was ready branch!; fi
+  echo Run Build Chain;
+  then npm run check && echo End of Chain Reached - can deploy;fi
 
 cache:
   directories:
