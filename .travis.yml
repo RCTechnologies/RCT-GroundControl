@@ -32,8 +32,8 @@ after_success:
 after_script:
 - |-
   if [ "$TRAVIS_BRANCH" == "master" ];
-  echo Run Build Chain;
-  then npm run check && echo End of Chain Reached - can deploy;fi
+  then echo Run Build Chain;
+  npm run check && echo End of Chain Reached - can deploy;fi
 
 cache:
   directories:
