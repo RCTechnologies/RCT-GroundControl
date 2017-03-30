@@ -23,11 +23,33 @@ script:
 
 after_success:
 - |-
-  if [ "$TRAVIS_BRANCH" != "master" ]; then git clone "https://github.com/"$TRAVIS_REPO_SLUG".git" repo_temp; cd repo_temp;
-  echo Mergin; git merge --ff-only origin/"$TRAVIS_BRANCH";
-  echo Pushing; git push https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG master ;
+  if [ "$TRAVIS_BRANCH" != "master" ];
+  then git clone "https://github.com/"$TRAVIS_REPO_SLUG".git" repo_temp;
+  cd repo_temp;
+
+  echo Mergin;
+  git merge --ff-only origin/"$TRAVIS_BRANCH";
+
+  echo Pushing;
+  git push https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG master ;
   git push https://$GH_TOKEN@github.com/"$TRAVIS_REPO_SLUG" --delete "$BRANCH";
-  else echo Was PULLREQUEST or directly on master; fi
+
+  echo Tag update;
+  VERSION=`git describe --abbrev=0 --tags`;
+  VERSION_BITS=(${VERSION//./ });
+
+  VNUM1=${VERSION_BITS[0]};
+  VNUM2=${VERSION_BITS[1]};
+  VNUM3=${VERSION_BITS[2]};
+  VNUM3=$((VNUM3+1));
+
+  NEW_TAG="$VNUM1.$VNUM2.$VNUM3";
+
+  echo "Updating $VERSION to $NEW_TAG";
+  git tag $NEW_TAG;
+  git push https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG --tags;
+
+  else echo Was directly on master; fi
 
 after_script:
 - |-
