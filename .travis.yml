@@ -54,8 +54,23 @@ after_success:
 after_script:
 - |-
   if [ "$TRAVIS_BRANCH" == "master" ];
-  then echo Run Build Chain;
-  npm run check && echo End of Chain Reached - can deploy;fi
+    then echo Run Build Chain;
+    npm run check && echo End of Chain Reached - can Update Tag && if [ "$TRAVIS_BRANCH" == "master" ];
+      then echo Tag update;
+      VERSION=`git describe --abbrev=0 --tags`;
+      VERSION_BITS=(${VERSION//./ });
+
+      VNUM1=${VERSION_BITS[0]};
+      VNUM2=${VERSION_BITS[1]};
+      VNUM3=0;
+      VNUM2=$((VNUM2+1));
+
+      NEW_TAG="$VNUM1.$VNUM2.$VNUM3";
+
+      echo "Updating $VERSION to $NEW_TAG";
+      git tag $NEW_TAG;
+      git push https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG --tags; fi
+  fi
 
 cache:
   directories:
