@@ -31,6 +31,15 @@ test('Test of pop()',t => {
     t.is(tempMapAction.getPaths()[0].lng, 1);    
 });
 
+test('Test of pop()',t => {
+    var mapActionStack = new MapActionStack();
+
+    // Verifying that the data is consistent
+    var tempMapAction = mapActionStack.pop();
+    t.is(tempMapAction, undefined);
+
+});
+
 test('Test of getSize()',t => {
     var mapActionStack = new MapActionStack();
 
