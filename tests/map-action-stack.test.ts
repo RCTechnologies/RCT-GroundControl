@@ -37,7 +37,6 @@ test('Test of pop()',t => {
     // Verifying that the data is consistent
     var tempMapAction = mapActionStack.pop();
     t.is(tempMapAction, undefined);
-
 });
 
 test('Test of getSize()',t => {
