@@ -15,6 +15,7 @@ before_script:
 - export DISPLAY=:99.0
 - sh -e /etc/init.d/xvfb start
 - sleep 3
+- npm install
 - sudo apt-get install python-pip python-dev
 - sudo pip install dronekit
 - sudo pip install dronekit-sitl
