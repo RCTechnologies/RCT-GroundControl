@@ -16,8 +16,8 @@ before_script:
 - sh -e /etc/init.d/xvfb start
 - sleep 3
 - sudo apt-get install python-pip python-dev
-- pip install dronekit
-- pip install dronekit-sitl
+- sudo pip install dronekit
+- sudo pip install dronekit-sitl
 - npm run package:linux
 - sudo apt-get install python-pip python-dev
 - export BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo $TRAVIS_BRANCH;
