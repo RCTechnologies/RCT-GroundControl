@@ -225,7 +225,7 @@ export class GoogleMapsComponent implements OnInit {
 
   executePythonScript(){
     var options = {
-      scriptPath: './src/python'
+      scriptPath: './src/python/misc'
     }
     PythonShell.run('timestamp.py', options, function(err, results){
       if (err) throw err;
