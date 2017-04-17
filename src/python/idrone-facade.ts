@@ -1,6 +1,7 @@
 import {LatLngLiteral} from './../../node_modules/angular2-google-maps/core';
 
 // This file serves as interface, as well as a contract for working with the python-layer
+// This Facade, should call the necessary python-files in order to accomplish its functions.
 export interface IDroneFacade{
 
     // Connects to the vehicle. Should take a home position, as this is very important to have.
