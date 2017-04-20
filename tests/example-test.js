@@ -46,7 +46,7 @@ describe('application launch', function () {
     });
 
     it('Contains text', function () {
-        return this.app.client.waitUntilTextExists('h2', 'Welcome to electron-forge Angular2!!!', 2000)
+        return this.app.client.waitUntilTextExists('button', 'Undo', 4000)
     });
 
 });
