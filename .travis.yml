@@ -60,39 +60,34 @@ after_success:
 
 after_script:
 - |-
-  if [ "$TRAVIS_BRANCH" == "master" ];
-    then echo Pull Tags;
-    git fetch --tags;
+  if [ "$TRAVIS_BRANCH" != "master" ];
+  then git clone "https://github.com/"$TRAVIS_REPO_SLUG".git" repo_temp;
+  cd repo_temp;
 
-    echo get Latest Tag;
-    VFLAG="";
-    VERSION=`git describe --tags $(git rev-list --tags --max-count=1)`;
-    VERSION_BITS=(${VERSION//./ });
-    VNUM1=${VERSION_BITS[0]};
-    VNUM2=${VERSION_BITS[1]};
-    VNUM3=${VERSION_BITS[2]};
-    echo $VERSION;
+  echo Mergin;
+  git merge --ff-only origin/"$TRAVIS_BRANCH";
 
-    echo Run Build Chain;
-    npm run check && echo End of Chain Reached - can Update Tag && if [ "$TRAVIS_BRANCH" == "master" ];
-          then echo Tag update Minor;
-          VNUM2=$((VNUM2+1));
-          VNUM3=0;
-        fi
+  echo Pushing;
+  git push https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG master ;
+  git push https://$GH_TOKEN@github.com/"$TRAVIS_REPO_SLUG" --delete "$BRANCH";
 
-        TEST=$(git tag -l --contains HEAD 2>&1);
-        echo $TEST;
+  echo Tag update;
+  git fetch --tags;
+  VERSION=`git describe --abbrev=0 --tags`;
+  VERSION_BITS=(${VERSION//./ });
 
-        if [ "$TEST" == "$VFLAG" ];
-          then echo Tag Update Patch;
-          VNUM3=$((VNUM3+1));
-        fi
+  VNUM1=${VERSION_BITS[0]};
+  VNUM2=${VERSION_BITS[1]};
+  VNUM3=${VERSION_BITS[2]};
+  VNUM3=$((VNUM3+1));
 
-        NEW_TAG="$VNUM1.$VNUM2.$VNUM3";
-        echo "Updating $VERSION to $NEW_TAG";
-        git tag $NEW_TAG;
-        git push https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG --tags;
-  fi
+  NEW_TAG="$VNUM1.$VNUM2.$VNUM3";
+
+  echo "Updating $VERSION to $NEW_TAG";
+  git tag $NEW_TAG;
+  git push https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG --tags;
+
+  else echo Was directly on master; fi
 
 cache:
   directories:
