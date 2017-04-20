@@ -19,7 +19,7 @@
     "make": "electron-forge make",
     "lint": "tslint src",
     "//": "karma start --single-run",
-    "test": "tsc && ava --verbose dist/tests/*.js && ava --verbose tests/example-AVA-Spectron.test.js",
+    "test": "tsc && ava --verbose dist/tests/*.js && ava --verbose tests/example-AVA-Spectron.test.js && mocha tests/example-CHAI-test.js",
     "coverage": "nyc npm test && nyc report --reporter=text-lcov | coveralls ",
     "check" : "nyc check-coverage --lines 90 --functions 90 --branches 90",
     "watch": "npm-watch",
