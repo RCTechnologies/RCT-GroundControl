@@ -12,14 +12,21 @@ branches:
 sudo: required
 
 before_script:
+- echo Start Virtual Screen
 - export DISPLAY=:99.0
 - sh -e /etc/init.d/xvfb start
 - sleep 3
+
+- echo Install Dependencies
 - npm install
 - sudo apt-get install python-pip python-dev
 - sudo pip install dronekit
 - sudo pip install dronekit-sitl
+
+- echo Package project
 - npm run package:linux
+
+- echo Set Environment variables
 - export BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo $TRAVIS_BRANCH;
   else echo $TRAVIS_PULL_REQUEST_BRANCH; fi)
 - echo "TRAVIS_BRANCH=$TRAVIS_BRANCH, PR=$PR, BRANCH=$BRANCH"
