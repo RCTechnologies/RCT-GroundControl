@@ -72,9 +72,9 @@ after_script:
         fi
 
         TEST=$(git tag -l --contains HEAD 2>&1);
-        echo $TEST;
+        echo test: $TEST;
 
-        if [ "$TEST" == "$VFLAG" ];
+        if [ !"$TEST" ];
           then echo Tag Update Patch;
           VNUM3=$((VNUM3+1));
         fi
