@@ -56,7 +56,6 @@ after_script:
     git fetch --tags;
 
     echo get Latest Tag;
-    VFLAG="";
     VERSION=`git describe --tags $(git rev-list --tags --max-count=1)`;
     VERSION_BITS=(${VERSION//./ });
     VNUM1=${VERSION_BITS[0]};
@@ -69,20 +68,25 @@ after_script:
           then echo Tag update Minor;
           VNUM2=$((VNUM2+1));
           VNUM3=0;
+
+          NEW_TAG="$VNUM1.$VNUM2.$VNUM3";
+          echo "Updating $VERSION to $NEW_TAG";
+          git tag $NEW_TAG;
+          git push https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG --tags;
         fi
 
         TEST=$(git tag -l --contains HEAD 2>&1);
         echo test: $TEST;
 
-        if [ !"$TEST" ];
+        if [ -z "$TEST" ];
           then echo Tag Update Patch;
           VNUM3=$((VNUM3+1));
-        fi
 
-        NEW_TAG="$VNUM1.$VNUM2.$VNUM3";
-        echo "Updating $VERSION to $NEW_TAG";
-        git tag $NEW_TAG;
-        git push https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG --tags;
+          NEW_TAG="$VNUM1.$VNUM2.$VNUM3";
+          echo "Updating $VERSION to $NEW_TAG";
+          git tag $NEW_TAG;
+          git push https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG --tags;
+        fi
   fi
 
 cache:
