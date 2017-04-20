@@ -37,8 +37,8 @@ script:
 after_success:
 - |-
   if [ "$TRAVIS_BRANCH" != "master" ];
-  then git clone "https://github.com/"$TRAVIS_REPO_SLUG".git" repo_temp;
-  cd repo_temp;
+  then git clone "https://github.com/"$TRAVIS_REPO_SLUG".git" temp_repo;
+  cd temp_repo;
 
   echo Mergin;
   git merge --ff-only origin/"$TRAVIS_BRANCH";
