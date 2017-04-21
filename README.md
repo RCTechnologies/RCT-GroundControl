@@ -47,7 +47,6 @@ Using a System in the loop emulated drone, we should be able to integrate functi
 Fill out README
 
 Expand Contribution section
-
 ```
 
 
