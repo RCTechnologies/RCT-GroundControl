@@ -6,6 +6,13 @@ Companion Software for Multipurpose Drone Platform
 ## Issues
   We use issues as our main driving force. Our Issues represents Tasks to be completed both Development wise and non.
 
+
+## DroneKit
+
+## Travis
+
+## Branching
+
 ## Git Phlow
   https://github.com/Praqma/git-phlow
 
@@ -35,8 +42,6 @@ And repeat...
 
 ## TODO's
 ```
-Squash Commits
-
 ### Use Dronekit-Sitl in test
 Using a System in the loop emulated drone, we should be able to integrate functional testing in our chain
 ```
