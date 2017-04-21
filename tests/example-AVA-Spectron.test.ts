@@ -19,7 +19,7 @@ test.afterEach.always(async t => {
     await t.context.app.stop();
 });
 
-test(async t => {
+test('Test off Electron app WindowLoad', async t => {
     const app = t.context.app;
     await app.client.waitUntilWindowLoaded();
 
