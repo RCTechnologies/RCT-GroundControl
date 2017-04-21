@@ -3,10 +3,11 @@
 Companion Software for Multipurpose Drone Platform
 
 # How we work
-## Git Phlow
-### Setup of Git Phlow
+## Issues
+  We use issues as our main driving force. Our Issues represents Tasks to be completed both Development wise and non.
 
-[TODO]
+## Git Phlow
+  https://github.com/Praqma/git-phlow
 
 ### Basic Git Phlow
 ```
