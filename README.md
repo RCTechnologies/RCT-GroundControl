@@ -6,9 +6,6 @@ Companion Software for Multipurpose Drone Platform
 ## Issues
   We use issues as our main driving force. Our Issues represents Tasks to be completed both Development wise and non.
 
-
-## DroneKit
-
 ## Travis
 
 ## Branching
@@ -40,19 +37,28 @@ git phlow cleanup
 ```
 And repeat...
 
+## DroneKit
+
 ## TODO's
 ```
-### Use Dronekit-Sitl in test
+Use Dronekit-Sitl in test
 Using a System in the loop emulated drone, we should be able to integrate functional testing in our chain
+
+Fill out README
+
+Expand Contribution section
+
 ```
 
 
-# Want to Contribute?
+## Want to Contribute?
 <ol>
 <li>Fork the Repo</li>
 <li>Make your changes</li>
 <li>Submit PullRequest</li>
 </ol>
+
+If your PullRequest fixes an issue, please include "fixes #issuenumber in your last commit message"
 
 ### or
 Create Issue
