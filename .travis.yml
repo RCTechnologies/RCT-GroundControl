@@ -15,7 +15,6 @@ before_script:
 - echo Start Virtual Screen
 - export DISPLAY=:99.0
 - sh -e /etc/init.d/xvfb start
-- sleep 3
 
 - echo Install Dependencies
 - npm install
