@@ -8,7 +8,6 @@ branches:
   only:
   - master
   - /^ready\/.*$/
-
 sudo: required
 
 install:
@@ -83,16 +82,13 @@ after_script:
           git push https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG --tags;
         fi
   fi
-
 cache:
   directories:
   - node_modules
-
 notifications:
   email:
     on_success: never
     on_failure: change
-
 env:
   global:
-    secure: OmJ9XO8x/3hLZEDngCMo4z6SeFIHpfQ7TWCjk0aB8i8P/+oWjklJv5iEIYlHfquCInx64rMXQzPPkbbqwcyPyjhxkbe58Jq2Pygrrw/VbK7tdbcjGdExrQP7+a3aUIasc2SzWKB1QCJdXCD3oyYotuCTzevCwBtHUYeiGhgYdNEVXhBRWX+8ISfHyNtWAr0B1lVpJ5W6Lh5p3U9pJXWa2mDxCPITCULBIxSZMosdxYYdXi2MUFanD2wNsX9ow+htkeE1I9brtT3nUzilKhcv6Zzo9nNLc9kNFH6XlsRd1Mm6Q6HHRJPD2vpXWIepRDGSc/Aw5jezt/5n/DEavmTnhm+zYoCuu2bScdXZBJQmVz8udE+2+m8UO3QlM50FEiDVeTS8VOq40vQa32Mau3ce5+OlSRgodl5NOpZv6gTJu+E3kOQO6DHkpNZFq3oprcg5jdt4QIXpnC7zcGQdUUGnycsC2mMxit/mP/dbU61KwspfZqViTkXwUIvlX32Bb/afN7Jo5VOi/JfcEfGYLMcZ/BTWTNEIctK0kX7MdqhiD0Ij+aoNCipK8oh3u/OKvZLLLmBOCpMm93vjafVk4+hWPdMwpFZiviOcg+SOBqhUvnmq89KVLbgB8uMWGKNzOVZzDSps3ngucgrJKiB64Xt8Uo8QH+27ND5gZ49pqzVBJJc=
+    secure: A3LaGLGnzVfmtbt2i3ejEAUBZWM446C7FKix0x8k8tB0Ta4CsoUKMcIQxcr6W9ZNg7f7+AFTiJzhny9KostUbCQ7Anndb6JL1m81Wlzf22ZUf9oaTaTUv/W4nGIhm5r4QEl967zbuWdvrmXpUHb7POLn9Jan9u2iBt3+LDk0aIPEgyV3EEBkj9Z+Q7CUSeJPh3LOWE8cP2t/3Y9cZP/dkGMLKlUiwIW6l7vLTTfM8RkTaFcP5+SywNt8UYub+ObBvHTZK319Vjj+aGqTKUsxvmO6j8ZnzPOlpzHbOe1CyM7QZ0onsEHaoM6Ia/cZEzLwOPiCJk3lEPUDVaQN9vZlF7t37GcgRYu5rxKSGUTAqEQVefqPLC/X5hof7WwH+osYWd0HHmHOUCgChdblmsQTp6/uP+yODwoIj2X71+08vNliZPCKAzZ0N69FeLnND8RyEcQjYeXyNHis9GfQBiRo1QbSUugnsz+OKcyxZWwOZfjB4y3/SNik4Iu+4i8U1IgpEC2hWOPLr8o1yl3MBEx/gb7Mb81ft+nS2yLGDtL7S5fKYwtI3HeaLsuqwO4b77fV7+WdQR1bQWxHkj7RoxgpcrF+0mFCmb/nYYpF/4u13cS90WF5y2m263+N0TKcnAADajMfS8WC2vRjaf1jHr254vfwPq+/HrxsR/J64WKgtC4=
