@@ -5,8 +5,8 @@
   "license": "UNLICENSED",
   "description": "My Electron application description",
   "repository": "https://github.com/RCTechnologies/RCT-npm GroundControl",
-  "keywords": [],
-  "author": "Robert Elving",
+  "keywords": ["Drone", "Flightcontrol"],
+  "author": ["Robert Elving","Christopher Mortensen"],
   "main": "src/index.ts",
   "bugs": {
     "url": "https://github.com/RCTechnologies/RCT-GroundControl/issues"
