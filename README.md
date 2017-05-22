@@ -1,4 +1,9 @@
-# RCT-GroundControl [![Build Status](https://travis-ci.org/RCTechnologies/RCT-GroundControl.svg?branch=master)](https://travis-ci.org/RCTechnologies/RCT-GroundControl) [![Coverage Status](https://coveralls.io/repos/github/RCTechnologies/RCT-GroundControl/badge.svg?branch=master)](https://coveralls.io/github/RCTechnologies/RCT-GroundControl?branch=master) [![Stories in Ready](https://badge.waffle.io/RCTechnologies/RCT-GroundControl.png?label=ready&title=Ready)](https://waffle.io/RCTechnologies/RCT-GroundControl)
+# RCT-GroundControl [![Stories in Ready](https://badge.waffle.io/RCTechnologies/RCT-GroundControl.png?label=ready&title=Ready)](https://waffle.io/RCTechnologies/RCT-GroundControl)
+Linux:  [![Build Status](https://travis-ci.org/RCTechnologies/RCT-GroundControl.svg?branch=master)](https://travis-ci.org/RCTechnologies/RCT-GroundControl) [![Coverage Status](https://coveralls.io/repos/github/RCTechnologies/RCT-GroundControl/badge.svg?branch=master)](https://coveralls.io/github/RCTechnologies/RCT-GroundControl?branch=master)
+
+Mac: [![Build Status](https://travis-ci.org/RCTechnologies/RCT-GroundControl.svg?branch=master)](https://travis-ci.org/RCTechnologies/RCT-GroundControl) [![Coverage Status](https://coveralls.io/repos/github/RCTechnologies/RCT-GroundControl/badge.svg?branch=master)](https://coveralls.io/github/RCTechnologies/RCT-GroundControl?branch=master)  
+
+Windows: [![Build status](https://ci.appveyor.com/api/projects/status/dtp4k5ioriw3ix5x?svg=true)](https://ci.appveyor.com/project/Robertelving/rct-groundcontrol)
 
 Companion Software for Multipurpose Drone Platform
 
