@@ -20,6 +20,7 @@ cache:
 
 install:
   - ps: Install-Product node $env:nodejs_version
+  - npm install npm
   - .\node_modules\.bin\npm install
   - npm run package:windows
 
