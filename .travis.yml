@@ -11,16 +11,17 @@ branches:
 
 sudo: required
 
-before_script:
-- echo Start Virtual Screen
-- export DISPLAY=:99.0
-- sh -e /etc/init.d/xvfb start
-
+install:
 - echo Install Dependencies
 - npm install
 - sudo apt-get install python-pip python-dev
 - sudo pip install dronekit
 - sudo pip install dronekit-sitl
+
+before_script:
+- echo Start Virtual Screen
+- export DISPLAY=:99.0
+- sh -e /etc/init.d/xvfb start
 
 - echo Package project
 - npm run package:linux
