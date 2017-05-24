@@ -6,8 +6,8 @@ node_js:
 - '6.5'
 branches:
   only:
-  - master
   - /^ready\/.*$/
+
 sudo: required
 
 install:
@@ -27,8 +27,6 @@ before_script:
 
 script:
 - npm run coverage
-
-after_success:
 - |-
   if [ "$TRAVIS_BRANCH" != "master" ];
   then git clone "https://github.com/"$TRAVIS_REPO_SLUG".git" temp_repo;
@@ -43,10 +41,9 @@ after_success:
 
   else echo Was directly on master; fi
 
-after_script:
+after_success:
 - |-
-  if [ "$TRAVIS_BRANCH" == "master" ];
-    then echo Pull Tags;
+    echo Pull Tags;
     git fetch --tags;
 
     echo get Latest Tag;
@@ -58,22 +55,9 @@ after_script:
     echo $VERSION;
 
     echo Run Build Chain;
-    npm run check && echo End of Chain Reached - can Update Tag && if [ "$TRAVIS_BRANCH" == "master" ];
-          then echo Tag update Minor;
-          VNUM2=$((VNUM2+1));
-          VNUM3=0;
+    npm run check && echo End of Chain Reached - can Update Tag && if [ "$TRAVIS_BRANCH" != "master" ];
+          then echo Tag update;
 
-          NEW_TAG="$VNUM1.$VNUM2.$VNUM3";
-          echo "Updating $VERSION to $NEW_TAG";
-          git tag $NEW_TAG;
-          git push https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG --tags;
-        fi
-
-        TEST=$(git tag -l --contains HEAD 2>&1);
-        echo test: $TEST;
-
-        if [ -z "$TEST" ];
-          then echo Tag Update Patch;
           VNUM3=$((VNUM3+1));
 
           NEW_TAG="$VNUM1.$VNUM2.$VNUM3";
@@ -81,7 +65,7 @@ after_script:
           git tag $NEW_TAG;
           git push https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG --tags;
         fi
-  fi
+
 cache:
   directories:
   - node_modules
