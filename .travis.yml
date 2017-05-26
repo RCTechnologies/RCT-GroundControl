@@ -1,9 +1,13 @@
 os:
 - linux
+- osx
+
 language:
 - node_js
+
 node_js:
 - '6.5'
+
 branches:
   only:
   - /^ready\/.*$/
@@ -11,62 +15,118 @@ branches:
 sudo: required
 
 install:
-- echo Install Dependencies
-- npm install
-- sudo apt-get install python-pip python-dev
-- sudo pip install dronekit
-- sudo pip install dronekit-sitl
+  - echo Install Dependencies
+  - npm install
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get install python-pip python-dev          ; fi
+  - sudo pip install dronekit
+  - sudo pip install dronekit-sitl
 
 before_script:
-- echo Start Virtual Screen
-- export DISPLAY=:99.0
-- sh -e /etc/init.d/xvfb start
 
-- echo Package project
-- npm run package:linux
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+      echo Start Virtual Screen;
+      export DISPLAY=:99.0;
+      sh -e /etc/init.d/xvfb start;
+      echo Package project;
+      npm run package:linux; fi
 
-script:
-- npm run coverage
-- |-
-  if [ "$TRAVIS_BRANCH" != "master" ];
-  then git clone "https://github.com/"$TRAVIS_REPO_SLUG".git" temp_repo;
-  cd temp_repo;
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
+      echo Package project;
+      npm run package:mac; fi
 
-  echo Mergin;
-  git merge --ff-only origin/"$TRAVIS_BRANCH";
+jobs:
+  include:
+    - stage: test
+      script:
+      - npm run test
 
-  echo Pushing;
-  git push https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG master ;
-  git push https://$GH_TOKEN@github.com/"$TRAVIS_REPO_SLUG" --delete "$TRAVIS_BRANCH";
+    - stage: integration
+      script:
+      - |-
+        git clone "https://github.com/"$TRAVIS_REPO_SLUG".git" temp_repo;
+        cd temp_repo;
 
-  cd ..
+        echo Mergin;
+        git merge --ff-only origin/"$TRAVIS_BRANCH";
 
-  else echo Was directly on master; fi
+        echo Pushing;
+        git push https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG master;
 
-after_success:
-- |-
-    echo Pull Tags;
-    git fetch --tags;
+    - stage: code Coverage
+      os:
+        - linux
+        - osx
 
-    echo get Latest Tag;
-    VERSION=`git describe --tags $(git rev-list --tags --max-count=1)`;
-    VERSION_BITS=(${VERSION//./ });
-    VNUM1=${VERSION_BITS[0]};
-    VNUM2=${VERSION_BITS[1]};
-    VNUM3=${VERSION_BITS[2]};
-    echo $VERSION;
+      script:
+        - npm run coverage
+        - npm run check
 
-    echo Run Build Chain;
-    npm run check && echo End of Chain Reached - can Update Tag && if [ "$TRAVIS_BRANCH" != "master" ];
-          then echo Tag update;
+    - stage: tag commit
+      script:
+      - |-
+          echo "Deploying to GitHub releases ..."
+          echo Pull Tags;
+          git fetch --tags;
+
+          echo get Latest Tag;
+          VERSION=`git describe --tags $(git rev-list --tags --max-count=1)`;
+          VERSION_BITS=(${VERSION//./ });
+          VNUM1=${VERSION_BITS[0]};
+          VNUM2=${VERSION_BITS[1]};
+          VNUM3=${VERSION_BITS[2]};
+          echo $VERSION;
+
+          echo Tag update;
 
           VNUM3=$((VNUM3+1));
 
           NEW_TAG="$VNUM1.$VNUM2.$VNUM3";
           echo "Updating $VERSION to $NEW_TAG";
           git tag $NEW_TAG;
-          git push https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG --tags;
-        fi
+          git push -q https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG --tags;
+
+    - stage: osx deliver GitHub Release
+      os:
+        - osx
+
+      script:
+        - tar cvf rct-groundcontrol-darwin-x64.tar out/rct-groundcontrol-darwin-x64
+        - ls
+
+      deploy:
+        provider: releases
+        api_key: $GH_TOKEN
+        file:
+
+        - "rct-groundcontrol-darwin-x64.tar"
+        - "rct-groundcontrol-darwin.dmg"
+
+        skip_cleanup: true
+        on:
+          tags: false
+          all_branches: true
+
+    - stage: Linux deliver GitHub Release
+      os:
+        - linux
+
+      script:
+      - tar cvf rct-groundcontrol-linux-x64.tar out/rct-groundcontrol-linux-x64
+
+      deploy:
+        provider: releases
+        api_key: $GH_TOKEN
+        file:
+        - "rct-groundcontrol-linux-x64.tar"
+
+        skip_cleanup: true
+        on:
+          tags: false
+          all_branches: true
+
+    - stage: cleanup
+      script: git push https://$GH_TOKEN@github.com/"$TRAVIS_REPO_SLUG" --delete "$TRAVIS_BRANCH";
+
 
 cache:
   directories:
