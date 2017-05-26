@@ -13,19 +13,14 @@ export class DroneFacade implements IDroneFacade{
             result = ''+data;  
             var arr = result.split("\n");
             resultCode = +arr[arr.length - 2];
-            // t.is(arr[arr.length - 2], "0");
-            // t.end(); 
             return callback(resultCode);
         })
-
         /**
          * ADDS ARGUMENT TO PROCESS
          */
-        if(connectionString != null){
-            process.stdin.write(connectionString)
-            process.stdin.end();
-        }
-        //  return callback(1);
+        process.stdin.write(connectionString)
+        process.stdin.end();
+    
     }
 
     // TODO: should be implemented in another issue

@@ -4,17 +4,16 @@ import dronekit_sitl
 import sys
 import subprocess
 import os
+from os import isatty
+
 
 sitl = dronekit_sitl.start_default()
 connection_string = sitl.connection_string()
-# TODO: something wrong with this check
-# if not sys.stdin.isatty():
-#     connection_string = sys.stdin.readline()
-#argument = sys.stdin.readlines()[0]
-#if not argument:
-#    connection_string = sitl.connection_string()
-#else:
-#    connection_string = argument
+
+argument = sys.stdin.readline()
+# If argument is a connection_string
+if argument != 'none':
+    connection_string = argument
 
 vehicle = connect(connection_string, wait_ready=True)
 

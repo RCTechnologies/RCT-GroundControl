@@ -14,7 +14,7 @@ test.cb('Test of connect to drone()', t => {
     //     t.is(arr[arr.length - 2], "0");
     //     t.end(); 
     // })
-    var connectionString = undefined;
+    var connectionString = 'none';
     var droneFacade: IDroneFacade = new DroneFacade();
     droneFacade.connect(connectionString, function(resultCode){
         t.is(resultCode, 0)
