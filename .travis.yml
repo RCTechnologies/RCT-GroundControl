@@ -41,6 +41,8 @@ jobs:
       - npm run test
 
     - stage: integration
+      install: skip
+      before_script: skip
       script:
       - |-
         git clone "https://github.com/"$TRAVIS_REPO_SLUG".git" temp_repo;
@@ -62,6 +64,8 @@ jobs:
         - npm run check
 
     - stage: tag commit
+      install: skip
+      before_script: skip
       script:
       - |-
           echo "Deploying to GitHub releases ..."
@@ -125,6 +129,8 @@ jobs:
           all_branches: true
 
     - stage: cleanup
+      install: skip
+      before_script: skip
       script: git push https://$GH_TOKEN@github.com/"$TRAVIS_REPO_SLUG" --delete "$TRAVIS_BRANCH";
 
 
