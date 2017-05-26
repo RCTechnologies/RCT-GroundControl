@@ -59,7 +59,7 @@
     ></sebm-map-polygon> 
 
     <sebm-google-map-polyline>
-        <sebm-google-map-polyline-point *ngFor="let item of points; let i = index" [latitude]="item.lat" [longitude]="item.lng">
+        <sebm-google-map-polyline-point *ngFor="let item of polyline; let i = index" [latitude]="item.lat" [longitude]="item.lng">
         </sebm-google-map-polyline-point>
     </sebm-google-map-polyline>
     

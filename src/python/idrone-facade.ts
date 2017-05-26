@@ -5,19 +5,19 @@ import {LatLngLiteral} from './../../node_modules/angular2-google-maps/core';
 export interface IDroneFacade{
 
     // Connects to the vehicle. Should take a home position, as this is very important to have.
-    connect(homePosition: LatLngLiteral);
+    connect(connectionString: String, callback: (n: number) => any);
 
     // Arms the vehicle
-    arm();
+    arm(connectionString: String, callback: (n: number) => any);
 
     // Gives a coordinate to the vehicle to fly to
-    flyTo(coord: LatLngLiteral);
+    flyTo(connectionString: String, coord: LatLngLiteral, callback: (n: number) => any);
 
     // The vehicle should fly home position 
-    returnToHome();
+    returnToHome(connectionString: String, callback: (n: number) => any);
 
     // Should abort whatever the drone is currently doing, and just hovering. 
-    abort();
+    abort(connectionString: String, callback: (n: number) => any);
 
 
 }

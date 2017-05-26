@@ -2,5 +2,7 @@ export enum MapActionType {
     POLYGON_DRAGGED,
     VERTEX_DRAGGED,
     VERTEX_ADDED,
-    POINT_ADDED
+    POINT_ADDED,
+    POLYGON_DELETED,
+    POLYLINE_DELETED
 }

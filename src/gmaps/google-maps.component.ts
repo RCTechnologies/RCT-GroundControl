@@ -37,7 +37,7 @@ export class GoogleMapsComponent implements OnInit {
   paths2: Array<LatLngLiteral> = [];
 
   // For drawing the point-to-point
-  points: Array<LatLngLiteral> = [];
+  polyline: Array<LatLngLiteral> = [];
 
   polyMouseDownCoord: LatLngLiteral;
 
@@ -183,13 +183,13 @@ export class GoogleMapsComponent implements OnInit {
   }
 
   deletePolyline(){
-    this.points = [];
+    this.polyline = [];
   }
 
   deployPoint(clickedPoint: LatLngLiteral){
     // Push to MapActionStack
-    this.mapActionStack.push(new MapAction(MapActionType.POINT_ADDED, this.points));
-    this.points.push({ lat: clickedPoint.lat, lng: clickedPoint.lng })
+    this.mapActionStack.push(new MapAction(MapActionType.POINT_ADDED, this.polyline));
+    this.polyline.push({ lat: clickedPoint.lat, lng: clickedPoint.lng })
   }
 
   // UTILITY FUNCTIONS
@@ -217,7 +217,11 @@ export class GoogleMapsComponent implements OnInit {
             this.paths2 = poppedItem.getPaths();
             break;
           case MapActionType.POINT_ADDED:
-            this.points = poppedItem.getPaths();
+            this.polyline = poppedItem.getPaths();
+            break;
+          case MapActionType.POLYGON_DELETED:
+            break;
+          case MapActionType.POLYLINE_DELETED:
             break;
         }
     }

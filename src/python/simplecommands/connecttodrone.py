@@ -7,6 +7,14 @@ import os
 
 sitl = dronekit_sitl.start_default()
 connection_string = sitl.connection_string()
+# TODO: something wrong with this check
+# if not sys.stdin.isatty():
+#     connection_string = sys.stdin.readline()
+#argument = sys.stdin.readlines()[0]
+#if not argument:
+#    connection_string = sitl.connection_string()
+#else:
+#    connection_string = argument
 
 vehicle = connect(connection_string, wait_ready=True)
 
