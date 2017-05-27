@@ -16,7 +16,7 @@ sudo: required
 
 install:
   - echo Install Dependencies
-  - npm install
+  - yarn install
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get install python-pip python-dev          ; fi
   - sudo pip install dronekit
   - sudo pip install dronekit-sitl
@@ -28,17 +28,17 @@ before_script:
       export DISPLAY=:99.0;
       sh -e /etc/init.d/xvfb start;
       echo Package project;
-      npm run package:linux; fi
+      yarn run package:linux; fi
 
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
       echo Package project;
-      npm run package:mac; fi
+      yarn run package:mac; fi
 
 jobs:
   include:
     - stage: test
       script:
-      - npm run test
+      - yarn test
 
     - stage: integration
       install: skip
@@ -60,8 +60,22 @@ jobs:
         - osx
 
       script:
-        - npm run coverage
-        - npm run check
+        - yran run coverage
+        - yarn run check
+
+    - stage: Functional Test
+      os:
+      - osx
+
+      script:
+        - yarn run functional_test
+
+    - stage: Functional Test
+      os:
+        - linux
+
+      script:
+            - yarn run functional_test
 
     - stage: tag commit
       install: skip
@@ -135,8 +149,10 @@ jobs:
 
 
 cache:
+  yarn: true
   directories:
-  - node_modules
+    - node_modules
+
 notifications:
   email:
     on_success: never
