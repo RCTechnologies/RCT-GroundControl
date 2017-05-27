@@ -60,7 +60,7 @@ jobs:
         - osx
 
       script:
-        - yran run coverage
+        - yarn run coverage
         - yarn run check
 
     - stage: Functional Test
