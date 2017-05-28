@@ -14,7 +14,7 @@
   "scripts": {
     "start": "electron-forge start",
     "package:mac": "electron-forge package --platform=darwin --arch=x64",
-    "package:mag:dmg": "electron-installer-dmg --overwrite ./out/rct-groundcontrol-darwin-x64/rct-groundcontrol.app rct-groundcontrol-darwin",
+    "package:mac:dmg": "electron-installer-dmg --overwrite ./out/rct-groundcontrol-darwin-x64/rct-groundcontrol.app rct-groundcontrol-darwin",
     "package:linux": "electron-forge package --platform=linux --arch=x64",
     "package:windows": "electron-forge package --platform=win32 --arch=x64",
     "make": "electron-forge make",
