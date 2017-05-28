@@ -103,13 +103,12 @@ jobs:
           git tag $NEW_TAG;
           git push -q https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG --tags;
 
-    - stage: osx deliver GitHub Release
+    - stage: deliver GitHub Release
       os:
         - osx
 
       script:
         - tar cvf rct-groundcontrol-darwin-x64.tar out/rct-groundcontrol-darwin-x64
-        - ls
 
       deploy:
         provider: releases
@@ -124,7 +123,7 @@ jobs:
           tags: false
           all_branches: true
 
-    - stage: Linux deliver GitHub Release
+    - stage: deliver GitHub Release
       os:
         - linux
 

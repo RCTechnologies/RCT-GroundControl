@@ -13,9 +13,9 @@
   },
   "scripts": {
     "start": "electron-forge start",
-    "package:mac": "electron-forge package && electron-installer-dmg --overwrite ./out/rct-groundcontrol-darwin-x64/rct-groundcontrol.app rct-groundcontrol-darwin",
+    "package:mac": "electron-forge package --platform=darwin --arch=x64",
     "package:linux": "electron-forge package --platform=linux --arch=x64",
-    "package:windows": "electron-forge package --platform=windows --arch=x64",
+    "package:windows": "electron-forge package --platform=win32 --arch=x64",
     "make": "electron-forge make",
     "lint": "tslint src",
     "test": "yarn run build && ava --verbose dist/tests/*.test.js",
