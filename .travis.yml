@@ -82,19 +82,15 @@ jobs:
       before_script: skip
       script:
       - |-
-          echo "Deploying to GitHub releases ..."
-          echo Pull Tags;
           git fetch --tags;
 
-          echo get Latest Tag;
+          echo Latest Tag;
           VERSION=`git describe --tags $(git rev-list --tags --max-count=1)`;
           VERSION_BITS=(${VERSION//./ });
           VNUM1=${VERSION_BITS[0]};
           VNUM2=${VERSION_BITS[1]};
           VNUM3=${VERSION_BITS[2]};
           echo $VERSION;
-
-          echo Tag update;
 
           VNUM3=$((VNUM3+1));
 
@@ -108,6 +104,7 @@ jobs:
         - osx
 
       script:
+        - yarn run package:mac:dmg
         - tar cvf rct-groundcontrol-darwin-x64.tar out/rct-groundcontrol-darwin-x64
 
       deploy:
