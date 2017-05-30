@@ -20,6 +20,8 @@
     "make": "electron-forge make",
     "lint": "tslint src",
     "test": "yarn run build && ava --verbose dist/tests/*.test.js",
+    "integration_test" : "yarn run build && ava --verbose dist/tests/*.itest.js",
+    "e2e_test" : "yarn run build && ava --verbose dist/tests/*.e2etest.js",
     "functional_test" : "yarn run build && ava --verbose dist/tests/*.functest.js",
     "coverage": "nyc yarn test && nyc report --reporter=text-lcov | coveralls ",
     "check": "nyc check-coverage --lines 90 --functions 90 --branches 90",
