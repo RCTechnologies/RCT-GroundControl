@@ -4,7 +4,6 @@ import dronekit_sitl
 import sys
 import subprocess
 import os
-from os import isatty
 
 
 sitl = dronekit_sitl.start_default()
